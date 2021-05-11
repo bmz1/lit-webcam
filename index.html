@@ -2,7 +2,6 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Lit-Webcam</title>
   </head>
@@ -12,20 +11,70 @@
     <script type="module" src="/src/lit-webcam.js"></script>
     <script type="module">
       import {
-      LitElement,
-      html,
-      css,
-    } from 'https://unpkg.com/lit-element/lit-element.js?module';
+        LitElement,
+        html,
+        css,
+      } from 'https://unpkg.com/lit-element/lit-element.js?module';
       class CameraWrapper extends LitElement {
         static get properties() {
           return {
             audio: { type: Boolean },
             videoContraints: { type: Boolean },
+            ownStream: { type: Boolean },
           };
         }
 
+        constructor() {
+          super();
+
+          this.audio = false;
+          this.audioMuted = true;
+          this.ownStream = null;
+        }
+
+        onMicrophoneMute({ detail: { enabled } }) {
+          console.log({ enabled });
+          if (enabled) {
+            this.audioMuted = true;
+          } else {
+            this.audioMuted = false;
+          }
+        }
+
+        onRequestMicrophone() {
+          this.audio = true;
+        }
+
         render() {
-          return html` <lit-webcam></lit-webcam> `;
+          return html`
+            <lit-webcam
+              ?audio="${this.audio}"
+              audioConstraints="${{ deviceId: '...' }}"
+              videoContraints="${{
+                width: 640,
+                height: 480,
+                facingMode: 'user',
+                deviceId: '...',
+              }}"
+              controls
+              width="${640}"
+              height="${480}"
+              label="John Doe"
+              @microphone-mute="${this.onMicrophoneMute}"
+              @video-mute="${this.onVideoMute}"
+              @request-microphone="${this.onRequestMicrophone}"
+              @onUserMedia="${({
+                event: {
+                  detail: { payload: stream },
+                },
+              }) => {}}"
+              @onUserMediaError="${({
+                event: {
+                  detail: { payload: error },
+                },
+              }) => {}}"
+            ></lit-webcam>
+          `;
         }
       }
 
