@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lit-Webcam</title>
+  </head>
+  <body>
+    <camera-wrapper></camera-wrapper>
+
+    <script type="module" src="/src/lit-webcam.js"></script>
+    <script type="module">
+      import {
+      LitElement,
+      html,
+      css,
+    } from 'https://unpkg.com/lit-element/lit-element.js?module';
+      class CameraWrapper extends LitElement {
+        static get properties() {
+          return {
+            audio: { type: Boolean },
+            videoContraints: { type: Boolean },
+          };
+        }
+
+        render() {
+          return html` <lit-webcam></lit-webcam> `;
+        }
+      }
+
+      customElements.define('camera-wrapper', CameraWrapper);
+    </script>
+  </body>
+</html>
