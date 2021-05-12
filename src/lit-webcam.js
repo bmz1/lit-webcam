@@ -170,6 +170,8 @@ export class LitWebcam extends LitElement {
     }
   }
 
+  /** @param {MediaStream} stream */
+
   handleUserMedia(stream) {
     this.stream = stream;
 
@@ -186,6 +188,8 @@ export class LitWebcam extends LitElement {
     this.dispatch('onUserMedia', stream);
   }
 
+  /** @param {Error} err */
+
   handleError(err) {
     console.debug(err);
     this.hasMedia = false;
@@ -193,6 +197,8 @@ export class LitWebcam extends LitElement {
 
     return;
   }
+
+  /** @param {MediaStream} stream */
 
   static stopMediaStream(stream) {
     if (stream) {
@@ -205,6 +211,11 @@ export class LitWebcam extends LitElement {
     }
   }
 
+  /** 
+   * @param {String} eventName 
+   * @param {Object} payload 
+   */
+
   dispatch(eventName, payload = {}) {
     this.dispatchEvent(
       new CustomEvent(eventName, {
@@ -215,6 +226,8 @@ export class LitWebcam extends LitElement {
     );
   }
 
+  /** @returns {Boolean} */
+
   get microphoneMuted() {
     if (this.stream) {
       if (this.stream.getAudioTracks()[0]) {
@@ -223,6 +236,8 @@ export class LitWebcam extends LitElement {
     }
     return true;
   }
+
+  /** @returns {Boolean} */
 
   get videoMuted() {
     if (this.stream) {

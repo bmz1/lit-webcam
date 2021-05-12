@@ -6,7 +6,7 @@
 `yarn dev`
 ## Usage
 
-```
+``` 
 <lit-webcam
      ?audio="${this.audio}"
      audioConstraints="${{ deviceId: '...' }}"

@@ -1,12 +1,25 @@
 {
   "name": "lit-webcam",
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "main": "dist/lit-webcam.es.js",
+  "exports": {
+    ".": "./dist/lit-webcam.es.js"
+  },
+  "description": "Webcamera webcomponent",
+  "author": "Mate Boer, @bmz1",
+  "homepage": "https://github.com/bmz1/lit-webcam",
+  "license": "MIT",
+  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "serve": "vite preview"
+    "test": "web-test-runner --coverage",
+    "test:watch": "web-test-runner --watch"
   },
   "devDependencies": {
+    "@open-wc/testing": "^3.0.0-next.1",
+    "@web/test-runner": "^0.13.4",
+    "@web/test-runner-puppeteer": "^0.10.0",
     "vite": "^2.3.0"
   },
   "dependencies": {
